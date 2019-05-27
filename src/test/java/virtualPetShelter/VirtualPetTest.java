@@ -203,8 +203,17 @@ public class VirtualPetTest {
 		OrganicDog testDog = new OrganicDog("Rutti");
 		testDog.setInitialValuesToRandom();
 		int cageDirtiness = testDog.getCageDirtinessCount();
-		System.out.println(cageDirtiness);
+		//System.out.println(cageDirtiness);
 		testDog.cleanCage();
 		assertEquals(0, testDog.getCageDirtinessCount());
 	}
+	
+	public void shouldCleanLitterBox() {
+		VirtualPetShelter litterBoxUnderTest = new VirtualPetShelter();
+		litterBoxUnderTest.increaseLitterBoxCOunter(4);
+		litterBoxUnderTest.decreaseLitterBoxCounter(2);
+		int result = litterBoxUnderTest.getLitterBoxCount();
+		assertEquals(2, result);
+		}
+	
 }

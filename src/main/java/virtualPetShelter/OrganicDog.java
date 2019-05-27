@@ -26,6 +26,7 @@ public class OrganicDog extends VirtualPet{
 		setCageDirtinessCount(0);
 		increaseHealthCounter();
 	}
+	@Override
 	public void setInitialValuesToRandom() {
 		int boredom = generateRandomNumber();
 		increaseBoredomCounter(boredom);

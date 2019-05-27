@@ -9,6 +9,7 @@ public class VirtualPetShelter {
 	Scanner input = new Scanner(System.in);
 	Map<String, VirtualPet> pets = new HashMap<>();
 	int welcomeCount = 0;
+	int litterBoxCounter = 0;
 
 	public void addVirtualPet(VirtualPet petObject) {
 		pets.put(petObject.getPetName(), petObject);
@@ -30,6 +31,26 @@ public class VirtualPetShelter {
 	public void removeAVirtualPet(VirtualPet petName) {
 		pets.remove(petName.getPetName(), petName);
 
+	}
+	public int getLitterBoxCount() {
+		return this.litterBoxCounter;
+	}
+	public void increaseLitterBoxCOunter(int litterBoxCount) {
+		this.litterBoxCounter += litterBoxCount;
+	}
+	public void decreaseLitterBoxCounter(int litterBoxValue) {
+		this.litterBoxCounter -= litterBoxValue;
+	}
+	public void litterBoxAdditionPerNewCat() {
+		int random = (int) (Math.random() * 5);
+		this.litterBoxCounter += random;
+		
+	}
+	public void litterBoxChecker() {
+		int litterBox = getLitterBoxCount();
+		if(litterBox >= 10) {
+			System.out.println("Please Clean the litter Box.  Its disgusting in there!");
+		}
 	}
 
 	public void welcome() {
@@ -62,6 +83,7 @@ public class VirtualPetShelter {
 	public void shelterSwitchStatement() {
 		boolean switchLoop = true;
 		while (switchLoop) {
+			
 
 			String switchValue = input.next();
 			switch (switchValue.toLowerCase()) {
@@ -76,7 +98,6 @@ public class VirtualPetShelter {
 						keyPet.setHungerCounter(0);
 					}
 				}
-
 				break;
 			case "2":
 				// this will be where the drink method is called on all pets in the collection
@@ -141,6 +162,8 @@ public class VirtualPetShelter {
 					addVirtualPet(catObject);
 					catObject.setInitialValuesToRandom();
 					System.out.println("We will take good care of this cat until a great home is found.");
+					litterBoxAdditionPerNewCat();
+					litterBoxChecker();
 					break;
 				case "3":
 					// add robot dog once the class is built out
@@ -183,6 +206,7 @@ public class VirtualPetShelter {
 				case "2":
 					//build litter box
 					System.out.println("Cleaning the litter box");
+					decreaseLitterBoxCounter(4);
 					break;
 					default:
 						System.out.println("Not sure what you meant to enter, but if your looking to clean up, clean the breakroom.");
@@ -210,6 +234,7 @@ public class VirtualPetShelter {
 					VirtualPet keyPet2 = findVirtualPet(key);
 					keyPet2.valueChecker();
 				}
+				litterBoxChecker();
 				break;
 			case "9":
 				// this will call menuItems()
