@@ -4,6 +4,7 @@ public class VirtualPet {
 	private int hungerCounter;
 	private int thirstCounter;
 	private int boredomCount;
+	private int healthCount = 15;
 	
 	private int excretionCounter;
 	private int sleepyCounter;
@@ -53,10 +54,30 @@ public class VirtualPet {
 	public void setBoredomCounter(int boredomValue) {
 		this.boredomCount = boredomValue;
 	}
+	
+	public void setHealthCount(int healthValue) {
+		this.healthCount = healthValue;
+	}
 
 	
 
 	
+	public void increaseHealthCounter() {
+		int random = generateRandBetweenZeroAndTwo();
+		this.healthCount += random;
+		
+	}
+	public int getHealthCount() {
+		return this.healthCount;
+	}
+	public void decreaseHealthCounter() {
+		int random = generateRandBetweenZeroAndTwo();
+		this.healthCount -= random;
+		
+	}
+	public void initialDecreaseInHealth(int health) {
+		this.healthCount -= health;
+	}
 
 	public void increaseExcretionCounter(int excretionValue) {
 		this.excretionCounter += excretionValue;
@@ -111,18 +132,30 @@ public class VirtualPet {
 		int hungerValue = getHungerLevel();
 		if(hungerValue >= 10) {
 			System.out.println(getPetName() + " needs to be fed right away!!!");
+			decreaseHealthCounter();
 		}
 		int thirstValue = getThirstLevel();
 		if(thirstValue >= 10) {
 			System.out.println(getPetName() + " is in dire need of a drink!!");
+			decreaseHealthCounter();
 		}
 		int boredomValue = getBoredomCount();
 		if(boredomValue >= 10) {
 			System.out.println(getPetName() + " is bored to TEARS!!! " + getPetName() + " needs to play!!");
+			decreaseHealthCounter();
 		}
 		int excretionValue = getExcretionCount();
 		if(excretionValue >= 10) {
 			System.out.println(getPetName() + " has made a mess on the floor!!  Make sure to take the pets outside.");
+			decreaseHealthCounter();
+		}
+		int healthValue = getHealthCount();
+		if(healthValue <= 3) {
+			System.out.println(getPetName() + " is not doing too well.  Check to see how you can help");
+		}
+		if(healthValue < 0) {
+			setHealthCount(0);
+			System.out.println(getPetName() + " must be taken to the vet immediately!!");
 		}
 	}
 
@@ -155,6 +188,8 @@ public class VirtualPet {
 		increaseThirstValue(thirst);
 		int excretionValue = generateRandomNumber();
 		increaseExcretionCounter(excretionValue);
+		int health = generateRandomNumber();
+		initialDecreaseInHealth(health);
 		
 	}
 
@@ -164,6 +199,9 @@ public class VirtualPet {
 		setInitialValuesToRandom();
 		
 	}
+
+
+
 
 	
 

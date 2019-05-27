@@ -75,6 +75,20 @@ public class VirtualPetTest {
 		int result = underTest.getHealthCount();
 		assertEquals(1, result);
 	}
+//	@Test
+//	public void shoulddecreaseHealthCOunter() {
+//		underTest.setHealthCount(2);
+//		underTest.decreaseHealthCounter();
+//		int result = underTest.getHealthCount();
+//		assertEquals(1, result);
+//	}
+	
+	@Test
+	public void shouldCreateOrganicDogNamedFido() {
+	OrganicDog testDog = new OrganicDog("Fido");
+	String result = testDog.getPetName();
+	assertEquals("Fido", result);
+	}
 
 	
 
