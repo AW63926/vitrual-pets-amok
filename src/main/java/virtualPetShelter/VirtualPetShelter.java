@@ -19,6 +19,10 @@ public class VirtualPetShelter {
 		return pets.get(petName);
 	}
 
+	public OrganicDog findOrganicDog(String dogName) {
+		return (OrganicDog) pets.get(dogName);
+	}
+
 	public Collection<VirtualPet> getAllPets() {
 		return pets.values();
 	}
@@ -119,12 +123,34 @@ public class VirtualPetShelter {
 				// Add a pet to shelter
 				System.out.println("What is the name of the pet?");
 				String petName = input.next();
-				System.out.println("What kind of pet is the pet?");
+				System.out.println("What kind of pet will be joining us here?");
+				System.out.println("Enter 1 for Dog.");
+				System.out.println("Enter 2 for Cat.");
+				System.out.println("Enter 3 for Robot Dog.");
+				System.out.println("Enter 4 for Robot Cat.");
 				String petType = input.next();
-				VirtualPet petObject = new VirtualPet(petName, petType);
-				addVirtualPet(petObject);
-				petObject.setInitialValuesToRandom();
-				System.out.println("We will take good care of this pet and see that a home is found");
+				switch (petType) {
+				case "1":
+					OrganicDog petObject = new OrganicDog(petName);
+					addVirtualPet(petObject);
+					petObject.setInitialValuesToRandom();
+					System.out.println("We will take good care of this dog and see that a home is found.");
+					break;
+				case "2":
+					OrganicCat catObject = new OrganicCat(petName);
+					addVirtualPet(catObject);
+					catObject.setInitialValuesToRandom();
+					System.out.println("We will take good care of this cat until a great home is found.");
+					break;
+				case "3":
+					// add robot dog once the class is built out
+					System.out.println("Build robot Dog");
+					break;
+				case "4":
+					// add robot cat once the class is built out
+					System.out.println("Build robot cat");
+					break;
+				}
 
 				break;
 			case "6":
@@ -142,7 +168,27 @@ public class VirtualPetShelter {
 				break;
 			case "7":
 				// this will clean up after the pets
-				System.out.println("Cleaning up after the pets");
+				System.out.println("Would you like to clean a Dog Cage or the Litter Box?");
+				System.out.println("Press 1 for Dog Cage.");
+				System.out.println("Press 2 for Litter Box");
+				String switchChoice = input.next();
+				switch (switchChoice) {
+				case "1":
+					System.out.println("Which cage would you like to clean?");
+					String cageName = input.next();
+					OrganicDog petCageCleaning = findOrganicDog(cageName);
+					petCageCleaning.cleanCage();
+					System.out.println(cageName + " has a sparkly clean cage!");
+					break;
+				case "2":
+					//build litter box
+					System.out.println("Cleaning the litter box");
+					break;
+					default:
+						System.out.println("Not sure what you meant to enter, but if your looking to clean up, clean the breakroom.");
+						System.out.println("Humans are a MESS!");
+						break;
+				}
 				break;
 			case "8":
 				// this will check on the pets

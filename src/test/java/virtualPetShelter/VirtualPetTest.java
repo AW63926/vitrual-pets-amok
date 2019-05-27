@@ -69,12 +69,12 @@ public class VirtualPetTest {
 
 	
 
-	@Test
-	public void shouldIncreaseHealthCounter() {
-		underTest.increaseHealthCounter(1);
-		int result = underTest.getHealthCount();
-		assertEquals(1, result);
-	}
+//	@Test
+//	public void shouldIncreaseHealthCounter() {
+//		underTest.increaseHealthCounter();
+//		int result = underTest.getHealthCount();
+//		assertEquals(1, result);
+//	}
 //	@Test
 //	public void shoulddecreaseHealthCOunter() {
 //		underTest.setHealthCount(2);
@@ -153,20 +153,20 @@ public class VirtualPetTest {
 		int result = underTest.getBoredomCount();
 		assertEquals(3, result);
 	}
-	@Test
-	public void shouldIncreaseSleepyCounter() {
-		underTest.increaseSleepyCounter(1);
-		int result = underTest.getSleepyCount();
-		assertEquals(1, result);
-	}
-	@Test
-	public void shouldDecreaseSleepyCounterWhenSleepIsCalled() {
-		underTest.increaseSleepyCounter(5);
-		underTest.sleep(2);
-		int result = underTest.getSleepyCount();
-		assertEquals(3, result);
-		
-	}
+//	@Test
+//	public void shouldIncreaseSleepyCounter() {
+//		underTest.increaseSleepyCounter(1);
+//		int result = underTest.getSleepyCount();
+//		assertEquals(1, result);
+//	}
+//	@Test
+//	public void shouldDecreaseSleepyCounterWhenSleepIsCalled() {
+//		underTest.increaseSleepyCounter(5);
+//		underTest.sleep(2);
+//		int result = underTest.getSleepyCount();
+//		assertEquals(3, result);
+//		
+//	}
 	@Test
 	public void shouldNameThePet() {
 		underTest.givePetName("Fido");
@@ -181,13 +181,30 @@ public class VirtualPetTest {
 		assertEquals("Dog", type);
 		
 	}
-	@Test
-	public void shouldGenerateRandomNumberBetweenZeroandTen() {
-		int random = underTest.generateRandomNumber();
-		assertEquals(null, random);
-	}
+//	@Test
+//	public void shouldGenerateRandomNumberBetweenZeroandTen() {
+//		int random = underTest.generateRandomNumber();
+//		assertEquals(null, random);
+//	}
 	@Test
 	public void shouldGenerateRandomBetweenZeroAndThree() {
 		underTest.generateRandBetweenZeroAndTwo();
+	}
+	
+	@Test
+	public void shouldCreateOrganicCatNamedSimon() {
+		OrganicCat simonTest = new OrganicCat("Simon");
+		String result = simonTest.getPetName();
+		assertEquals("Simon", result);
+	
+	}
+	@Test
+	public void shouldCleanDogCage() {
+		OrganicDog testDog = new OrganicDog("Rutti");
+		testDog.setInitialValuesToRandom();
+		int cageDirtiness = testDog.getCageDirtinessCount();
+		System.out.println(cageDirtiness);
+		testDog.cleanCage();
+		assertEquals(0, testDog.getCageDirtinessCount());
 	}
 }
