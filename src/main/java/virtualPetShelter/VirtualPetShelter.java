@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class VirtualPetShelter {
 	Scanner input = new Scanner(System.in);
 	Map<String, VirtualPet> pets = new HashMap<>();
+	Map<String, RoboPet> robopets = new HashMap<>();
 	int welcomeCount = 0;
 	int litterBoxCounter = 0;
 
@@ -16,8 +17,16 @@ public class VirtualPetShelter {
 
 	}
 
+	public void addRoboPet(RoboPet roboObject) {
+		robopets.put(roboObject.getPetName(), roboObject);
+	}
+
 	public VirtualPet findVirtualPet(String petName) {
 		return pets.get(petName);
+	}
+
+	public RoboPet findRoboPet(String roboName) {
+		return (RoboPet) robopets.get(roboName);
 	}
 
 	public OrganicDog findOrganicDog(String dogName) {
@@ -32,23 +41,31 @@ public class VirtualPetShelter {
 		pets.remove(petName.getPetName(), petName);
 
 	}
+	public void removeARoboPet(RoboPet petName) {
+		robopets.remove(petName.getPetName(), petName);
+	}
+
 	public int getLitterBoxCount() {
 		return this.litterBoxCounter;
 	}
+
 	public void increaseLitterBoxCOunter(int litterBoxCount) {
 		this.litterBoxCounter += litterBoxCount;
 	}
+
 	public void decreaseLitterBoxCounter(int litterBoxValue) {
 		this.litterBoxCounter -= litterBoxValue;
 	}
+
 	public void litterBoxAdditionPerNewCat() {
 		int random = (int) (Math.random() * 5);
 		this.litterBoxCounter += random;
-		
+
 	}
+
 	public void litterBoxChecker() {
 		int litterBox = getLitterBoxCount();
-		if(litterBox >= 10) {
+		if (litterBox >= 10) {
 			System.out.println("Please Clean the litter Box.  Its disgusting in there!");
 		}
 	}
@@ -83,7 +100,6 @@ public class VirtualPetShelter {
 	public void shelterSwitchStatement() {
 		boolean switchLoop = true;
 		while (switchLoop) {
-			
 
 			String switchValue = input.next();
 			switch (switchValue.toLowerCase()) {
@@ -125,20 +141,41 @@ public class VirtualPetShelter {
 				myPet.increaseHealthCounter();
 				break;
 			case "4":
-				// remove pet
-				System.out.println("Which pet would you like to adopt?");
-				for (String key : pets.keySet()) {
-					System.out.println(key);
-				}
-				if (pets.isEmpty()) {
-					System.out.println("Sorry, there are no pets in the shelter to adopt.");
+				System.out.println("Would you like to adopt an Animal pet or a RoboPet?");
+				System.out.println("Enter 1 for Animal Pet.");
+				System.out.println("Enter 2 for RoboPet.");
+				String oneOrTwo = input.next();
+				switch (oneOrTwo) {
+				case "1":
+					System.out.println("Which pet would you like to adopt?");
+					for (String key : pets.keySet()) {
+						System.out.println(key);
+					}
+					if (pets.isEmpty()) {
+						System.out.println("Sorry, there are no pets in the shelter to adopt.");
+						break;
+					}
+					String userChoice = input.next();
+					VirtualPet userPet = findVirtualPet(userChoice);
+					removeAVirtualPet(userPet);
+					System.out.println("Thanks for adopting " + userChoice + "!!");
 					break;
+				case "2":
+					System.out.println("Which RoboPet would you like to adopt?");
+					for (String key : robopets.keySet()) {
+						System.out.println(key);
+					}
+					if (robopets.isEmpty()) {
+						System.out.println("Sorry, there are no RoboPets available for adoption today.");
+						break;
+					}
+					String userSelection = input.next();
+					RoboPet userRoboPet = findRoboPet(userSelection);
+					removeARoboPet(userRoboPet);
+					System.out.println("Thanks for adopting " + userSelection + "!!");
+					break;
+					
 				}
-				String userChoice = input.next();
-				VirtualPet userPet = findVirtualPet(userChoice);
-				removeAVirtualPet(userPet);
-				System.out.println("Thanks for adopting " + userChoice + "!!");
-
 				break;
 			case "5":
 				// Add a pet to shelter
@@ -147,8 +184,8 @@ public class VirtualPetShelter {
 				System.out.println("What kind of pet will be joining us here?");
 				System.out.println("Enter 1 for Dog.");
 				System.out.println("Enter 2 for Cat.");
-				System.out.println("Enter 3 for Robot Dog.");
-				System.out.println("Enter 4 for Robot Cat.");
+				System.out.println("Enter 3 for RoboPet.");
+				System.out.println("Enter 4 for Other Pets.");
 				String petType = input.next();
 				switch (petType) {
 				case "1":
@@ -166,12 +203,18 @@ public class VirtualPetShelter {
 					litterBoxChecker();
 					break;
 				case "3":
-					// add robot dog once the class is built out
-					System.out.println("Build robot Dog");
+					RoboPet roboPetObject = new RoboPet(petName);
+					addRoboPet(roboPetObject);
+					roboPetObject.setInitialValuesToRandom();
+					System.out.println("RoboPets are always welcome here!  Thank You");
 					break;
 				case "4":
-					// add robot cat once the class is built out
-					System.out.println("Build robot cat");
+					// add other pet from VirtualPet class
+					System.out.println("Please enter the Specific type of pet.");
+					petType = input.next();
+					VirtualPet anyPet = new VirtualPet(petName, petType);
+					System.out.println("Thank You.  We will take good care of this " + petType + ".");
+					addVirtualPet(anyPet);
 					break;
 				}
 
@@ -204,24 +247,24 @@ public class VirtualPetShelter {
 					System.out.println(cageName + " has a sparkly clean cage!");
 					break;
 				case "2":
-					//build litter box
+					// build litter box
 					System.out.println("Cleaning the litter box");
 					decreaseLitterBoxCounter(4);
 					break;
-					default:
-						System.out.println("Not sure what you meant to enter, but if your looking to clean up, clean the breakroom.");
-						System.out.println("Humans are a MESS!");
-						break;
+				default:
+					System.out.println(
+							"Not sure what you meant to enter, but if your looking to clean up, clean the breakroom.");
+					System.out.println("Humans are a MESS!");
+					break;
 				}
 				break;
 			case "8":
 				// this will check on the pets
-				System.out.println("Name\t|Type\t|Hunger\t|Thirst\t|Boredom |Bathroom|Health");
+				System.out.println("Name\t|Type\t|Hunger\t|Thirst\t|Boredom |Bathroom |Health ");
 				for (String key : pets.keySet()) {
 					// System.out.print(key);
 					VirtualPet keyPet = findVirtualPet(key);
-					System.out.println(
-							"---------------------------------------------------------------------------------");
+					System.out.println("------------------------------------------------------------");
 					System.out.println(key + "\t|" + keyPet.getPetType() + "\t|" + keyPet.getHungerLevel() + "\t|"
 							+ keyPet.getThirstLevel() + "\t|" + keyPet.getBoredomCount() + "\t  |"
 							+ keyPet.getExcretionCount() + "\t   |" + keyPet.getHealthCount());
@@ -230,6 +273,15 @@ public class VirtualPetShelter {
 				}
 				System.out.println(
 						"***********************************************************************************************");
+
+				System.out.println("Name\t|Type\t|Boredom |Oil Level");
+				System.out.println("----------------------------------");
+				for (String key : robopets.keySet()) {
+					RoboPet keyRoboPet = findRoboPet(key);
+					System.out.println(key + "\t|" + keyRoboPet.getPetType() + "\t|" + keyRoboPet.getBoredomCount()
+							+ "\t   |" + keyRoboPet.getOilLevel());
+				}
+
 				for (String key : pets.keySet()) {
 					VirtualPet keyPet2 = findVirtualPet(key);
 					keyPet2.valueChecker();
@@ -249,7 +301,9 @@ public class VirtualPetShelter {
 
 			}
 		}
+		input.close();
 
 	}
+	
 
 }

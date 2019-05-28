@@ -7,7 +7,7 @@ public class VirtualPet {
 	private int healthCount = 15;
 	
 	private int excretionCounter;
-	private int sleepyCounter;
+	//private int sleepyCounter;
 	private String petName;
 	private String petType;
 	

@@ -215,5 +215,9 @@ public class VirtualPetTest {
 		int result = litterBoxUnderTest.getLitterBoxCount();
 		assertEquals(2, result);
 		}
+	public void shouldBeAbleToCreatVirtualPetRobotDog() {
+		RobotDog testRobotDog = new RobotDog("Roverbot");
+		String result = testRobotDog.
+	}
 	
 }
