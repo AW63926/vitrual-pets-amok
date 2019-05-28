@@ -206,7 +206,7 @@ public class VirtualPetShelter {
 					RoboPet roboPetObject = new RoboPet(petName);
 					addRoboPet(roboPetObject);
 					roboPetObject.setInitialValuesToRandom();
-					System.out.println("RoboPets are always welcome here!  Thank You");
+					System.out.println("RoboPets are always welcome here!  Thank You.");
 					break;
 				case "4":
 					// add other pet from VirtualPet class
