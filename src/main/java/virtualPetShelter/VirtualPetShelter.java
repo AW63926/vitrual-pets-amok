@@ -128,17 +128,44 @@ public class VirtualPetShelter {
 				}
 				break;
 			case "3":
-				// Play with a pet
-				System.out.println("Which pet would you like to play with?");
-				String petString = input.next();
-				VirtualPet myPet = findVirtualPet(petString);
-				myPet.play(5);
-				if (myPet.getBoredomCount() < 0) {
-					myPet.setBoredomCounter(0);
+				System.out.println("Would you like to play with a Robot or Animal Pet?");
+				System.out.println("Enter 1 for animal.");
+				System.out.println("Enter 2 for robot.");
+				String typeChoice = input.next();
+				switch(typeChoice) {
+				case "1":
+					System.out.println("Which pet would you like to play with?");
+					for (String key : pets.keySet()) {
+						System.out.println(key);
+					}
+					String petString = input.next();
+					VirtualPet myPet = findVirtualPet(petString);
+					myPet.play(5);
+					if (myPet.getBoredomCount() < 0) {
+						myPet.setBoredomCounter(0);
+					}
+					System.out.println(myPet.getPetName() + " is having fun, and Boredom has been reduced to "
+							+ myPet.getBoredomCount());
+					myPet.increaseHealthCounter();
+					break;
+				case "2":
+					System.out.println("Which RoboPet would you like to play with?");
+					for (String roboKey : robopets.keySet()) {
+						System.out.println(roboKey);
+					}
+					String roboPetName = input.next();
+					RoboPet playPet = findRoboPet(roboPetName);
+					playPet.play(3);
+					if(playPet.getBoredomCount() < 0) {
+						playPet.setBoredomCounter(0);
+					}
+					System.out.println(playPet.getPetName() + " is having a blast!");
+					break;
+					default:
+						System.out.println("Please choose a robot or animal pet to play with.");
+						System.out.println("Its not like you have anything better to do....");
+						break;
 				}
-				System.out.println(myPet.getPetName() + " is having fun, and Boredom has been reduced to "
-						+ myPet.getBoredomCount());
-				myPet.increaseHealthCounter();
 				break;
 			case "4":
 				System.out.println("Would you like to adopt an Animal pet or a RoboPet?");
@@ -222,6 +249,9 @@ public class VirtualPetShelter {
 			case "6":
 				// take a pet on a bathroom break
 				System.out.println("Which pet are you taking on a Bathroom break?");
+				for (String key : pets.keySet()) {
+					System.out.println(key);
+				}
 				String petBathroomName = input.next();
 				VirtualPet petBathroom = findVirtualPet(petBathroomName);
 				if(petBathroom.getPetType() == "Cat") {
@@ -245,6 +275,9 @@ public class VirtualPetShelter {
 				switch (switchChoice) {
 				case "1":
 					System.out.println("Which cage would you like to clean?");
+					for (String key : pets.keySet()) {
+						System.out.println(key);
+					}
 					String cageName = input.next();
 					OrganicDog petCageCleaning = findOrganicDog(cageName);
 					petCageCleaning.cleanCage();
@@ -284,6 +317,8 @@ public class VirtualPetShelter {
 					RoboPet keyRoboPet = findRoboPet(key);
 					System.out.println(key + "\t|" + keyRoboPet.getPetType() + "\t|" + keyRoboPet.getBoredomCount()
 							+ "\t   |" + keyRoboPet.getOilLevel());
+					keyRoboPet.roboTick();
+					keyRoboPet.valueChecker();
 				}
 
 				for (String key : pets.keySet()) {

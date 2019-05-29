@@ -22,6 +22,18 @@ public class RoboPet extends VirtualPet{
 	public void changeOil() {
 		this.oilLevel = 10;
 	}
+	public void increaseOilLevel(int oilLevel) {
+		this.oilLevel += oilLevel;
+	}
+	
+	public void decreaseOilLevel(int oilLevel) {
+		this.oilLevel -= oilLevel;
+	}
+	
+	public void roboTick() {
+		int random = (int)(Math.random() * 5);
+		decreaseOilLevel(random);
+	}
 	
 	
 	@Override
@@ -43,15 +55,15 @@ public class RoboPet extends VirtualPet{
 			decreaseHealthCounter();
 		}
 		
-		int healthValue = getHealthCount();
-		if(healthValue <= 3) {
-			System.out.println(getPetName() + " is looking a little rusty");
+		if(oilLevel < 3) {
+			System.out.println(getPetName() + " is running a little rough and needs an oil change!");
 		}
-		if(healthValue < 0) {
-			setHealthCount(0);
-			System.out.println(getPetName() + " has ceased up and needs immediate attention!");
+		if(oilLevel < 0) {
+			System.out.println(getPetName() + " is ceasing up and needs an oil change immediately!!");
+			setOilLevel(0);
 		}
 	}
+
 	
 
 

@@ -222,5 +222,21 @@ public class VirtualPetTest {
 		String result = testRobot.getPetName();
 		assertEquals("Roverbot", result);
 	}
+	@Test
+	public void shouldIncreaseOilLevel() {
+		RoboPet underTestRobo = new RoboPet("RoverBot");
+		underTestRobo.setOilLevel(1);
+		underTestRobo.increaseOilLevel(1);
+		int oilLevel = underTestRobo.getOilLevel();
+		assertEquals(2, oilLevel);
+	}
+	@Test
+	public void shouldDecreaseOilLevel() {
+		RoboPet underTestRobo = new RoboPet("RoverBot");
+		underTestRobo.setOilLevel(2);
+		underTestRobo.decreaseOilLevel(1);
+		int oilLevel = underTestRobo.getOilLevel();
+		assertEquals(1, oilLevel);
+	}
 	
 }
