@@ -33,6 +33,7 @@ public class RoboPet extends VirtualPet{
 	public void roboTick() {
 		int random = (int)(Math.random() * 5);
 		decreaseOilLevel(random);
+		increaseBoredomCounter(3);
 	}
 	
 	
@@ -50,9 +51,12 @@ public class RoboPet extends VirtualPet{
 	public void valueChecker() {
 		
 		int boredomValue = getBoredomCount();
-		if(boredomValue >= 10) {
+		if(boredomValue >= 7 && boredomValue < 10) {
 			System.out.println(getPetName() + " is eager to show off!!  Give " + getPetName() + " some attention.");
-			decreaseHealthCounter();
+		}
+		if(boredomValue >= 10) {
+			System.out.println(getPetName() + " is extremely bored, and has begun plotting a mutiny!!");
+			
 		}
 		
 		if(oilLevel < 3) {

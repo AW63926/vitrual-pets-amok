@@ -318,12 +318,15 @@ public class VirtualPetShelter {
 					System.out.println(key + "\t|" + keyRoboPet.getPetType() + "\t|" + keyRoboPet.getBoredomCount()
 							+ "\t   |" + keyRoboPet.getOilLevel());
 					keyRoboPet.roboTick();
-					keyRoboPet.valueChecker();
 				}
 
 				for (String key : pets.keySet()) {
 					VirtualPet keyPet2 = findVirtualPet(key);
 					keyPet2.valueChecker();
+				}
+				for(String key2 : robopets.keySet()) {
+					RoboPet roboKey = findRoboPet(key2);
+					roboKey.valueChecker();
 				}
 				litterBoxChecker();
 				break;
