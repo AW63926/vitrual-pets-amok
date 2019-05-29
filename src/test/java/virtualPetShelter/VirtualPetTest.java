@@ -1,6 +1,7 @@
 package virtualPetShelter;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -202,12 +203,12 @@ public class VirtualPetTest {
 	public void shouldCleanDogCage() {
 		OrganicDog testDog = new OrganicDog("Rutti");
 		testDog.setInitialValuesToRandom();
-		int cageDirtiness = testDog.getCageDirtinessCount();
+		//int cageDirtiness = testDog.getCageDirtinessCount();
 		//System.out.println(cageDirtiness);
 		testDog.cleanCage();
 		assertEquals(0, testDog.getCageDirtinessCount());
 	}
-	
+	@Test
 	public void shouldCleanLitterBox() {
 		VirtualPetShelter litterBoxUnderTest = new VirtualPetShelter();
 		litterBoxUnderTest.increaseLitterBoxCOunter(4);
@@ -215,9 +216,11 @@ public class VirtualPetTest {
 		int result = litterBoxUnderTest.getLitterBoxCount();
 		assertEquals(2, result);
 		}
+	@Test
 	public void shouldBeAbleToCreatVirtualPetRobotDog() {
-		RobotDog testRobotDog = new RobotDog("Roverbot");
-		String result = testRobotDog.
+		RoboPet testRobot = new RoboPet("Roverbot");
+		String result = testRobot.getPetName();
+		assertEquals("Roverbot", result);
 	}
 	
 }

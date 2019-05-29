@@ -224,6 +224,10 @@ public class VirtualPetShelter {
 				System.out.println("Which pet are you taking on a Bathroom break?");
 				String petBathroomName = input.next();
 				VirtualPet petBathroom = findVirtualPet(petBathroomName);
+				if(petBathroom.getPetType() == "Cat") {
+					System.out.println(petBathroomName + " is a cat, and will use the litter box when ready.  ");
+					break;
+				}
 				petBathroom.bathroom(3);
 				petBathroom.increaseHealthCounter();
 				if (petBathroom.getExcretionCount() < 0) {
@@ -253,7 +257,7 @@ public class VirtualPetShelter {
 					break;
 				default:
 					System.out.println(
-							"Not sure what you meant to enter, but if your looking to clean up, clean the breakroom.");
+							"Not sure what you meant to enter, but if you arent sure what to clean up, clean the breakroom.");
 					System.out.println("Humans are a MESS!");
 					break;
 				}
