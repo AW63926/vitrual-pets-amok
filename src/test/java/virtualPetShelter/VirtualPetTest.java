@@ -238,5 +238,13 @@ public class VirtualPetTest {
 		int oilLevel = underTestRobo.getOilLevel();
 		assertEquals(1, oilLevel);
 	}
+	@Test
+	public void shouldChangeOilForAllRoboPets() {
+		RoboPet underTest1 = new RoboPet("Rover");
+		underTest1.setOilLevel(5);
+		underTest1.changeOil();
+		int result = underTest1.getOilLevel();
+		assertEquals(10, result);
+	}
 	
 }

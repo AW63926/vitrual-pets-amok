@@ -93,8 +93,9 @@ public class VirtualPetShelter {
 		System.out.println("6.  Enter 6 to take a pet on a bathroom break.");
 		System.out.println("7.  Enter 7 to clean up after the pets.");
 		System.out.println("8.  Enter 8 to check on all of the pets.");
-		System.out.println("9.  Enter 9 to display the menu.");
-		System.out.println("10. Enter \"Quit\" to exit.");
+		System.out.println("9.  Enter 9 to oil the RoboPets.");
+		System.out.println("10. Enter 10 to display the menu.");
+		System.out.println("11. Enter \"Quit\" to exit.");
 	}
 
 	public void shelterSwitchStatement() {
@@ -316,7 +317,7 @@ public class VirtualPetShelter {
 				for (String key : robopets.keySet()) {
 					RoboPet keyRoboPet = findRoboPet(key);
 					System.out.println(key + "\t|" + keyRoboPet.getPetType() + "\t|" + keyRoboPet.getBoredomCount()
-							+ "\t   |" + keyRoboPet.getOilLevel());
+							+ "\t |" + keyRoboPet.getOilLevel());
 					keyRoboPet.roboTick();
 				}
 
@@ -331,6 +332,13 @@ public class VirtualPetShelter {
 				litterBoxChecker();
 				break;
 			case "9":
+				System.out.println("Thanks for oiling the RoboPets.  Gotta keep them from getting rusty!");
+				for(String key : robopets.keySet()) {
+					RoboPet roboKey = findRoboPet(key);
+					roboKey.changeOil();
+					}
+				break;
+			case "10":
 				// this will call menuItems()
 				menuItems();
 				break;
