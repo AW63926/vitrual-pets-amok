@@ -277,7 +277,11 @@ public class VirtualPetShelter {
 				case "1":
 					System.out.println("Which cage would you like to clean?");
 					for (String key : pets.keySet()) {
-						System.out.println(key);
+						String findPet = findVirtualPet(key).getPetType();
+						if(findPet == "Dog") {
+							System.out.println(key);
+						}
+						
 					}
 					String cageName = input.next();
 					OrganicDog petCageCleaning = findOrganicDog(cageName);
