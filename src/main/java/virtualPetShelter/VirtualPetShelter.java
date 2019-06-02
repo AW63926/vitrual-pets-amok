@@ -252,14 +252,13 @@ public class VirtualPetShelter{
 				// take a pet on a bathroom break
 				System.out.println("Which pet are you taking on a Bathroom break?");
 				for (String key : pets.keySet()) {
-					System.out.println(key);
+					String petTypes = findVirtualPet(key).getPetType();
+					if(petTypes != "Cat") {
+						System.out.println(key);
+					}
 				}
 				String petBathroomName = input.next();
 				VirtualPet petBathroom = findVirtualPet(petBathroomName);
-				if(petBathroom.getPetType() == "Cat") {
-					System.out.println(petBathroomName + " is a cat, and will use the litter box when ready.  ");
-					break;
-				}
 				petBathroom.bathroom(3);
 				petBathroom.increaseHealthCounter();
 				if (petBathroom.getExcretionCount() < 0) {
