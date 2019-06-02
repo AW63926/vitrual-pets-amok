@@ -2,10 +2,11 @@ package virtualPetShelter;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
-public class VirtualPetShelter {
+public class VirtualPetShelter{
 	Scanner input = new Scanner(System.in);
 	Map<String, VirtualPet> pets = new HashMap<>();
 	Map<String, RoboPet> robopets = new HashMap<>();
@@ -358,6 +359,8 @@ public class VirtualPetShelter {
 		input.close();
 
 	}
+
+	
 	
 
 }
